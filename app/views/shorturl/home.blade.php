@@ -4,13 +4,24 @@
 <div class="container-narrow">
 	<div class="masthead">
 		<ul class="nav nav-pills pull-right">
-			<li class="active"><a href="">Home</a></li>
-			<li><a href="">About</a></li>
+			<li class="active"><a href="{{url('/')}}">Home</a></li>
+			<li><a href="#">About</a></li>
 		</ul>
 		<h3 class="muted">Laravel Shorturl</h3>
 	</div>
 	<hr>
-
+	@if($errors->has())
+	<div class="row">
+		<div class="alert alert-danger alert-dismissable">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			<ul>
+			@foreach($errors->all() as $message)
+            	<li>{{$message}}</li>
+            @endforeach
+            </ul>
+		</div>
+	</div>
+	@endif
 	<div class="row">
 		<div class="shortit"> 
 			{{Form::open(array('url' => 'shorten', 'method' => 'post', 'class' => 'form-search'))}}

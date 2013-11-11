@@ -10,10 +10,10 @@ class ShortenController extends BaseController {
 		//validate url
 		$val = Url::validate(array('url' => $url));
 
-		//if error, return error message
+		//if error, return with error message
 		if ($val !== true) 
 		{
-			return 'error';
+			return Redirect::to('/')->withErrors($val);
 		}
 
 		//check whether url is shortened or not
@@ -21,7 +21,8 @@ class ShortenController extends BaseController {
 
 		if ($record) 
 		{
-			return 'shortened already';
+			$url = url('/'.$record->given, $parameters = array(), $secure = null);
+			return View::make('shorturl.result')->with('url',$url);
 		}
 
 		//create new short url
@@ -33,7 +34,8 @@ class ShortenController extends BaseController {
 		if($data->save())
 		{
 			$row = Url::whereUrl($url)->first();
-			return $row->given;
+			$url = url('/'.$row->given, $parameters = array(), $secure = null);
+			return View::make('shorturl.result')->with('url',$url);
 		}
 
 	}
