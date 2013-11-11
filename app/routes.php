@@ -17,3 +17,15 @@ Route::get('/', function()
 });
 
 Route::post('shorten', array('as' => 'shorten', 'uses' => 'ShortenController@postShorten', 'before' => 'csrf'));
+
+Route::get('{shorten}', function($given)
+{
+    // query the DB for the row with that short url
+    $row = Url::whereGiven($given)->first();
+
+    // if not found, redirect to home page
+    if ( is_null($row) ) return Redirect::to('/');
+
+    // Otherwise, fetch the URL, and redirect.
+    return Redirect::to($row->url);
+});
