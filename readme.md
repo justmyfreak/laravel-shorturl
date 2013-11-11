@@ -1,6 +1,6 @@
 ## Laravel Short URL
 
-This is simple implementation short url service using Laravel 4. Its feature is limited to create shorten url from given url.
+This is simple implementation of short url service using Laravel 4. Its feature is limited to create shorten url from given url.
 If you have any suggestion or want to improve it, don't hesitate to make pull request. If you have any question, please contact me at [@justmyfreak](http://twitter.com/justmyfreak)
 
 ## Installation
